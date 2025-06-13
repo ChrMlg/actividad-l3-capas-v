@@ -5,6 +5,7 @@ import com.example.labo3.Service.iVideogameService;
 import com.example.labo3.dto.response.VideoGameResponse;
 import com.example.labo3.entities.Videogame;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -12,10 +13,12 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/videogame")
 public class VideogameController {
+    private final VideogameServiceImpl videogameServiceImpl;
     private iVideogameService VideogameService;
     @Autowired
-    public VideogameController(VideogameService videogameService) {
+    public VideogameController(VideogameService videogameService, VideogameServiceImpl videogameServiceImpl) {
         this.videogameService = videogameService;
+        this.videogameServiceImpl = videogameServiceImpl;
     }
 
     @GetMapping
@@ -33,6 +36,10 @@ public class VideogameController {
         return VideogameService.findById(id);
     }
 
+    @GetMapping("/{id}")
+    public ResponseEntity<VideoGameResponse> getVideogameById(@PathVariable int id) {
+        VideoGameResponse videogame = videogameServiceImpl.getVideogameById(id);
+    }
 
 
 
