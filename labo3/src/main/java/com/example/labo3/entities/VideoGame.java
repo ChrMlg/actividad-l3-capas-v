@@ -12,7 +12,7 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class Videogame {
+public class VideoGame {
     @Id
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -20,6 +20,6 @@ public class Videogame {
     private String name;
     private String genre;
     @Column(name = "release_year")
-    private String releaseYear;
+    private int releaseYear;
     private String developer;
 }
