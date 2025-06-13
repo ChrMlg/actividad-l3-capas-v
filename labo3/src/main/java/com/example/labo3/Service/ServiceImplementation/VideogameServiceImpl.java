@@ -1,5 +1,6 @@
 package com.example.labo3.Service.ServiceImplementation;
 
+import com.example.labo3.Repository.VideogameRepository;
 import com.example.labo3.Service.iVideogameService;
 import com.example.labo3.dto.request.VideoGameRequest;
 import com.example.labo3.dto.response.VideoGameResponse;
@@ -7,10 +8,13 @@ import com.example.labo3.entities.VideoGame;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 @Service
 @RequiredArgsConstructor
 public class VideogameServiceImpl implements iVideogameService {
-    private final iVideogameService iVideogameService;
+    private final VideogameRepository videogameRepository;
 
     @Override
     public VideoGameResponse createVideogame(VideoGameRequest dto) throws Exception {
@@ -25,14 +29,22 @@ public class VideogameServiceImpl implements iVideogameService {
     }
 
     @Override
-    public VideoGameResponse getVideogameById(Long idVideojuego) throws Exception {
-        return null;
+    public VideoGameResponse getVideogameById(Integer idVideogame) throws Exception {
+        VideoGame toSend = videogameRepository
+                .findById(idVideogame)
+                .orElseThrow(() -> new Exception("Videojuego con id " + idVideogame + " no existe"));
+        return mapToVideoGameResponse(toSend);
     }
 
+
     @Override
-    public VideoGameResponse getAllVideogames() throws Exception {
-        return null;
+    public List<VideoGameResponse> getAllVideogames() {
+        return videogameRepository.findAll()
+                .stream()
+                .map(this::mapToVideoGameResponse)
+                .collect(Collectors.toList());
     }
+
 
     private VideoGameResponse mapToVideoGameResponse(VideoGame videogame) {
         return new VideoGameResponse(
