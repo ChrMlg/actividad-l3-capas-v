@@ -4,55 +4,54 @@ import com.example.labo3.Repository.VideogameRepository;
 import com.example.labo3.Service.iVideogameService;
 import com.example.labo3.dto.request.VideoGameRequest;
 import com.example.labo3.dto.response.VideoGameResponse;
-import com.example.labo3.entities.VideoGame;
-import lombok.RequiredArgsConstructor;
+import com.example.labo3.exception.VideoGameNotFoundException;
+import com.example.labo3.utils.mappers.VideoGameMapper;
+import jakarta.transaction.Transactional;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
-@RequiredArgsConstructor
 public class VideogameServiceImpl implements iVideogameService {
     private final VideogameRepository videogameRepository;
 
-    @Override
-    public VideoGameResponse createVideogame(VideoGameRequest dto) throws Exception {
-        VideoGame videogame = new VideoGame();
-        videogame.setName(dto.getName());
-        videogame.setGenre(dto.getGenre());
-        videogame.setReleaseYear(dto.getReleaseYear());
-        videogame.setDeveloper(dto.getDeveloper());
-
-        return mapToVideoGameResponse(videogame);
-
+    @Autowired
+    public VideogameServiceImpl(VideogameRepository videogameRepository) {
+        this.videogameRepository = videogameRepository;
     }
 
     @Override
-    public VideoGameResponse getVideogameById(Integer idVideogame) throws Exception {
-        VideoGame toSend = videogameRepository
-                .findById(idVideogame)
-                .orElseThrow(() -> new Exception("Videojuego con id " + idVideogame + " no existe"));
-        return mapToVideoGameResponse(toSend);
+    public List<VideoGameResponse> findAll() {
+        return VideoGameMapper.toDTOList(videogameRepository.findAll());
     }
-
 
     @Override
-    public List<VideoGameResponse> getAllVideogames() {
-        return videogameRepository.findAll()
-                .stream()
-                .map(this::mapToVideoGameResponse)
-                .collect(Collectors.toList());
-    }
-
-
-    private VideoGameResponse mapToVideoGameResponse(VideoGame videogame) {
-        return new VideoGameResponse(
-            videogame.getId(),
-            videogame.getName(),
-            videogame.getGenre(),
-            videogame.getReleaseYear(),
-            videogame.getDeveloper()
+    public VideoGameResponse findById(int id) {
+        return VideoGameMapper.toDTO(videogameRepository.findById(id)
+                        .orElseThrow(() -> new VideoGameNotFoundException("Video game not found with id: " + id))
         );
+    }
+
+    @Override
+    @Transactional
+    public VideoGameResponse save(VideoGameRequest videoGame) {
+        return VideoGameMapper.toDTO(videogameRepository.save(VideoGameMapper.toEntityCreate(videoGame))
+        );
+    }
+
+    @Override
+    @Transactional
+    public VideoGameResponse update(VideoGameRequest videoGame) {
+        return VideoGameMapper.toDTO(videogameRepository.save(VideoGameMapper.toEntityCreate(videoGame))
+        );
+    }
+
+    @Override
+    public void delete(int id) {
+        if (!videogameRepository.existsById(id)) {
+            throw new RuntimeException("Video game not found with id: " + id);
+        }
+        videogameRepository.deleteById(id);
     }
 }

@@ -1,12 +1,13 @@
 package com.example.labo3.utils.mappers;
 
+import com.example.labo3.dto.request.VideoGameRequest;
 import com.example.labo3.dto.response.VideoGameResponse;
 import com.example.labo3.entities.VideoGame;
 
 import java.util.List;
 
 public class VideoGameMapper {
-    public static VideoGame toEntityCreate(VideoGame videoGame) {
+    public static VideoGame toEntityCreate(VideoGameRequest videoGame) {
         return VideoGame.builder()
                 .name(videoGame.getName())
                 .genre(videoGame.getGenre())

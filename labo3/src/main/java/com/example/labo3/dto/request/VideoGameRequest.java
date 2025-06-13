@@ -11,7 +11,6 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class VideoGameRequest {
-
     @NotNull(message = "Name cannot be null")
     private String name;
     @NotNull(message = "Genre cannot be null")

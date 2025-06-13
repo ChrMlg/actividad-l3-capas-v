@@ -1,0 +1,13 @@
+spring:
+  application:
+    name: actividad-l3-capas-v
+
+  datasource:
+    url: jdbc:postgresql://localhost:5432/videogame_db
+    username: postgres
+    password: 12345
+
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: update

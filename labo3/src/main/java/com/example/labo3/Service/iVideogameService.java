@@ -6,9 +6,9 @@ import com.example.labo3.dto.response.VideoGameResponse;
 import java.util.List;
 
 public interface iVideogameService {
-
-    VideoGameResponse createVideogame(VideoGameRequest dto) throws Exception;
-    VideoGameResponse getVideogameById(Integer idVideojuego) throws Exception;
-    List<VideoGameResponse> getAllVideogames() throws Exception;
-
+    List<VideoGameResponse> findAll();
+    VideoGameResponse findById(int id);
+    VideoGameResponse save(VideoGameRequest videoGame);
+    VideoGameResponse update(VideoGameRequest videoGame);
+    void delete(int id);
 }
