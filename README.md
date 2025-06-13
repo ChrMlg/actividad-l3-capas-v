@@ -112,16 +112,16 @@ La API debe incluir los siguientes **3 endpoints**, cada uno desarrollado por un
 ```markdown
 # Integrantes del equipo
 
-- **Nombre:** Juan Pérez  
-  **Carnet:** 20200001  
+- **Nombre:** Andrea MAria Peña Hernandez 
+  **Carnet:** 000975919  
   **Endpoint trabajado:** POST /api/videogames
 
-- **Nombre:** María Gómez  
-  **Carnet:** 20200002  
+- **Nombre:** Jose Alejandro Chavez  
+  **Carnet:** 00149320  
   **Endpoint trabajado:** GET /api/videogames
 
-- **Nombre:** Luis Torres  
-  **Carnet:** 20200003  
+- **Nombre:** Christian Eduardo Melgar  
+  **Carnet:** 00110219  
   **Endpoint trabajado:** GET /api/videogames/{id}
 
 ## ⏰ Hora límite de entrega
