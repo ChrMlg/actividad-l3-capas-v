@@ -1,9 +1,12 @@
 package com.example.labo3.Service;
 
+import com.example.labo3.dto.request.VideoGameRequest;
+import com.example.labo3.dto.response.VideoGameResponse;
+
 public interface iVideogameService {
 
-    VideojuegoResponseDTO createVideojuego(CreateVideojuegoDTO dto) throws Exception;
-    VideojuegoResponseDTO getVideojuegoById(Long idVideojuego) throws Exception;
-    VideojuegoResponseDTO getAllVideojuegos() throws Exception;
+    VideoGameResponse createVideogame(VideoGameRequest dto) throws Exception;
+    VideoGameResponse getVideogameById(Long idVideojuego) throws Exception;
+    VideoGameResponse getAllVideogames() throws Exception;
 
 }

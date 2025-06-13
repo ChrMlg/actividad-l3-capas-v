@@ -6,16 +6,18 @@ import com.example.labo3.dto.response.VideoGameResponse;
 
 public class VideogameServiceImpl implements iVideogameService {
     @Override
-    public VideoGameResponse createVideojuego(VideoGameRequest dto) throws Exception {
-        return null;
-    }
-    @Override
-    public VideoGameResponse getVideojuegoById(Integer id) throws Exception {
+    public VideoGameResponse createVideogame(VideoGameRequest dto) throws Exception {
         return null;
     }
 
     @Override
-    public VideoGameResponse getAllVideojuegos(Integer id) throws Exception {
+    public VideoGameResponse getVideogameById(Long idVideojuego) throws Exception {
         return null;
     }
+
+    @Override
+    public VideoGameResponse getAllVideogames() throws Exception {
+        return null;
+    }
+
 }
