@@ -14,6 +14,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.UUID;
 
 @RestController
 @RequestMapping("/api/videogame")
@@ -27,7 +28,7 @@ public class VideogameController {
         return ResponseEntity.ok(videogames);
     }
 
-    @PostMapping("/create")
+ /*   @PostMapping("/create")
     public ResponseEntity<GenericResponse> createVideogame(
             @RequestBody @Valid VideoGameRequest object) throws Exception {
 
@@ -40,35 +41,20 @@ public class VideogameController {
                 .build()
                 .buildResponse();
     }
-/*
-    @PostMapping
-    public ResponseEntity<VideoGameResponse> createVideogame(@RequestBody Videogame videogame) throws Exception {
-        VideoGameResponse createdVideogame = videogameServiceImpl.createVideogame(videogame);
-        return ResponseEntity.ok(createdVideogame);
-    }
 
-    @GetMapping("/{id}")
-    public ResponseEntity<VideoGameResponse> getVideogameById(@PathVariable Integer id) throws Exception {
-        VideoGameResponse videogame = videogameServiceImpl.getVideogameById(id);
-        return ResponseEntity.ok(videogame);
-    }
+@GetMapping("/{idVideogame}")
+public ResponseEntity<GenericResponse> getVideogameById(
+        @PathVariable("idVideogame") UUID idVideogame) throws Exception {
 
-    // Uncomment and implement the following methods if needed }
-
-   /* @PostMapping("/save")
-    public Videogame getVideogame(@RequestBody Videogame videogame) {
-        return videogameService.save(videogame);
-    }
-
-    @GetMapping("/{id}")
-    public Videogame getVideogameById2(@PathVariable int id) {
-        return VideogameService.findById(id);
-    }
-
-    @GetMapping("/{id}")
-    public ResponseEntity<VideoGameResponse> getVideogameById(@PathVariable int id) {
-        VideoGameResponse videogame = videogameServiceImpl.getVideogameById(id);
-    }*/
+    VideoGameResponse data = videogameService.getVideogameById(idVideogame);
+    return GenericResponse.builder()
+            .message("Videojuego encontrado exitosamente")
+            .data(data)
+            .status(HttpStatus.OK)
+            .build()
+            .buildResponse();
+}
+*/
 
 
 

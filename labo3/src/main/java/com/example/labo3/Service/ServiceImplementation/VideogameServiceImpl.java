@@ -9,6 +9,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.UUID;
 import java.util.stream.Collectors;
 
 @Service
@@ -17,18 +18,24 @@ public class VideogameServiceImpl implements iVideogameService {
     private final VideogameRepository videogameRepository;
     @Override
     public VideoGameResponse createVideogame(VideoGameRequest dto) throws Exception {
-        VideoGame videogame = new VideoGame();
-        videogame.setName(dto.getName());
-        videogame.setGenre(dto.getGenre());
-        videogame.setReleaseYear(dto.getReleaseYear());
-        videogame.setDeveloper(dto.getDeveloper());
 
-        return mapToVideoGameResponse(videogame);
+        VideoGame videogame = VideoGame.builder()
+                .name(dto.getName())
+                .genre(dto.getGenre())
+                .releaseYear(dto.getReleaseYear())
+                .developer(dto.getDeveloper())
+                .build();
+
+        // 1) Guarda primero
+        VideoGame saved = videogameRepository.save(videogame);
+
+        // 2) Mapea sobre el objeto ya persistido
+        return mapToVideoGameResponse(saved);
 
     }
 
     @Override
-    public VideoGameResponse getVideogameById(Integer idVideogame) throws Exception {
+    public VideoGameResponse getVideogameById(UUID idVideogame) throws Exception {
         VideoGame toSend = videogameRepository
                 .findById(idVideogame)
                 .orElseThrow(() -> new Exception("Videojuego con id " + idVideogame + " no existe"));
