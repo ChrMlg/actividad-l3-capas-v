@@ -15,7 +15,6 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class VideogameServiceImpl implements iVideogameService {
     private final VideogameRepository videogameRepository;
-
     @Override
     public VideoGameResponse createVideogame(VideoGameRequest dto) throws Exception {
         VideoGame videogame = new VideoGame();
